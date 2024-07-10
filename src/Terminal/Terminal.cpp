@@ -18,12 +18,14 @@ Terminal::Terminal(int baudRate, int user) {
 }
 
 void Terminal::Read() {
-    while (Serial.available()) {
-        std::string command = Serial.readStringUntil('\n').c_str();
-        this->shell->Interpret(command);
+    std::string command = Serial.readStringUntil('\n').c_str();
+    if (command.length() == 0) {
+        return;
     }
+
+    this->shell->Interpret(command);
 }
 
 void Terminal::Write(std::string output) {
-    Serial.print(output.c_str());
+    Serial.write(output.c_str());
 }

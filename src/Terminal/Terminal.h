@@ -1,5 +1,5 @@
-#ifndef TERMINAL_HPP
-#define TERMINAL_HPP
+#ifndef TERMINAL_HP
+#define TERMINAL_HP
 
 #include <string>
 

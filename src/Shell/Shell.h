@@ -1,5 +1,5 @@
-#ifndef SHELL_HPP
-#define SHELL_HPP
+#ifndef SHELL_H
+#define SHELL_H
 
 #include <string>
 

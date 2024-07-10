@@ -1,5 +1,5 @@
-#ifndef SESSION_HPP
-#define SESSION_HPP
+#ifndef SESSION_HP
+#define SESSION_HP
 
 class Session {
     public:
