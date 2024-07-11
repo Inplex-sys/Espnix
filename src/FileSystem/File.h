@@ -15,8 +15,6 @@ class File {
         std::string Read();
         void Write(std::string data);
         void Remove();
-        void SetOwner(int user);
-        void SetPermissions(int permissions);
 };
 
 #endif

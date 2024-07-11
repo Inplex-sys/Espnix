@@ -5,34 +5,16 @@
 #include <sstream>
 #include <vector>
 
+#include <FileSystem/Folder.h>
+#include <FileSystem/File.h>
+#include <FileSystem/FileSystem.h>
 #include <Terminal/Terminal.h>
 
+#include <Shell/Busybox/ListCommand.h>
+#include <Shell/Busybox/ChangeDirectoryCommand.h>
+
 #include "Shell.h"
-
-class ICommand
-{
-public:
-    virtual ~ICommand() = default;
-    virtual void Execute(const std::vector<std::string> &args, Terminal *terminal) = 0;
-};
-
-class ListCommand : public ICommand
-{
-public:
-    void Execute(const std::vector<std::string> &args, Terminal *terminal) override
-    {
-        terminal->Write("Executing 'ls' command\n");
-    }
-};
-
-class ChangeDirectoryCommand : public ICommand
-{
-public:
-    void Execute(const std::vector<std::string> &args, Terminal *terminal) override
-    {
-        terminal->Write("Executing 'cd' command\n");
-    }
-};
+#include "ICommand.h"
 
 Shell::Shell() : terminal(nullptr)
 {

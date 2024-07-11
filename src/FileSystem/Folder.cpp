@@ -17,6 +17,23 @@ void Folder::AddFolder(Folder* folder)
     this->folders.push_back(*folder);
 }
 
+std::vector<void*> Folder::ListContent()
+{
+    std::vector<void*> contents;
+
+    for (auto& file : this->files)
+    {
+        contents.push_back(static_cast<void*>(&file));
+    }
+
+    for (auto& folder : this->folders)
+    {
+        contents.push_back(static_cast<void*>(&folder));
+    }
+
+    return contents;
+}
+
 void Folder::RemoveFile(std::string filename)
 {
     for (int i = 0; i < this->files.size(); i++)

@@ -18,6 +18,7 @@ class Folder {
         Folder();
         void AddFile(File* file);
         void AddFolder(Folder* folder);
+        std::vector<void*> ListContent();
         void RemoveFile(std::string filename);
         void RemoveFolder(std::string foldername);
 };
