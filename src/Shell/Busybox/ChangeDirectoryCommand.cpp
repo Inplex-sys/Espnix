@@ -6,32 +6,43 @@
 
 void ChangeDirectoryCommand::Execute(const std::vector<std::string> &args, Terminal *terminal)
 {
-    if (args.size() == 0)
-    {
-        terminal->Write("cd: missing argument\n");
-        return;
-    }
+    std::string path = args[0];
 
-    /* FileSystem *fs = FileSystem::GetInstance();
+    FileSystem *fs = FileSystem::GetInstance();
     Folder *folder = fs->GetFolder(fs->currentPath);
 
-    if (args[0] == "..")
+    if (path == ".")
     {
-        if (folder->parent != nullptr)
-        {
-            fs->currentPath = folder->parent->path;
-        }
         return;
     }
 
-    for (auto &f : folder->folders)
+    if (path == "..")
     {
-        if (f.foldername == args[0])
+        if (fs->currentPath == "/")
         {
-            fs->currentPath = f.path;
             return;
         }
-    } */
 
-    terminal->Write("cd: no such file or directory: " + args[0] + "\n");
+        fs->currentPath = fs->currentPath.substr(0, fs->currentPath.find_last_of("/"));
+        return;
+    }
+
+    for (Folder *subFolder : folder->folders)
+    {
+        if (subFolder->name == path)
+        {
+            if (fs->currentPath == "/")
+            {
+                fs->currentPath += path;
+            }
+            else
+            {
+                fs->currentPath += "/" + path;
+            }
+        }
+
+        return;
+    }
+
+    terminal->Write("-esh: cd: " + args[0] + ": No such file or directory\n");
 }

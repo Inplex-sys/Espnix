@@ -7,21 +7,31 @@
 class Folder;
 class File;
 
-class FileSystem {
-    private:
-        static FileSystem* instance;
-        FileSystem();
+class FileSystemEntry
+{
+public:
+    std::string name;
+    int owner;
+    int permissions; // Octal representation of permissions
+};
 
-    public:
-        std::string currentPath;
-        Folder *root;
+class FileSystem
+{
+private:
+    static FileSystem *instance;
+    FileSystem();
 
-        FileSystem(const FileSystem&) = delete;
-        FileSystem& operator=(const FileSystem&) = delete;
+public:
+    std::string currentPath;
+    Folder *root;
 
-        static FileSystem* GetInstance();
-        Folder *GetFolder(std::string path);
-        File *GetFile(std::string path);
+    FileSystem(const FileSystem &) = delete;
+    FileSystem &operator=(const FileSystem &) = delete;
+
+    static FileSystem *GetInstance();
+    std::string GetStringPermissions(int permissions, std::string entryType);
+    File *GetFile(std::string path);
+    Folder *GetFolder(std::string path);
 };
 
 #endif

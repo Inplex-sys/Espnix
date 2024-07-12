@@ -6,7 +6,8 @@
 
 #include "Terminal.h"
 
-Terminal::Terminal(int baudRate, int user) {
+Terminal::Terminal(int baudRate, int user)
+{
     Serial.begin(baudRate);
     this->baudRate = baudRate;
     this->session = new Session();
@@ -17,15 +18,18 @@ Terminal::Terminal(int baudRate, int user) {
     this->shell->Prompt();
 }
 
-void Terminal::Read() {
+void Terminal::Read()
+{
     std::string command = Serial.readStringUntil('\n').c_str();
-    if (command.length() == 0) {
+    if (command.length() == 0)
+    {
         return;
     }
 
     this->shell->Interpret(command);
 }
 
-void Terminal::Write(std::string output) {
+void Terminal::Write(std::string output)
+{
     Serial.write(output.c_str());
 }

@@ -17,7 +17,7 @@ void File::Write(std::string data)
 {
     this->size = data.size();
 
-    std::string* chunk = (std::string*) malloc(this->size);
+    std::string *chunk = (std::string *)malloc(this->size);
     this->content = chunk;
 }
 
