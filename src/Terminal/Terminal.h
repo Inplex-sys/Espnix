@@ -15,6 +15,7 @@ class Terminal {
         Terminal(int baudRate, int user);
         void Read();
         void Write(std::string output);
+        void Clear();
 };
 
 #endif // TERMINAL_HPP

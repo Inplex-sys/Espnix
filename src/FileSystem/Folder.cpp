@@ -17,7 +17,6 @@ void Folder::AddFile(File *file)
 void Folder::AddFolder(Folder *folder)
 {
     folder->creationDate = time(0);
-    Serial.println((long)folder->creationDate);
     this->folders.push_back(folder);
 }
 

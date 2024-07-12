@@ -1,3 +1,6 @@
+#include <Arduino.h>
+#include <sstream>
+
 #include <FileSystem/Folder.h>
 #include <FileSystem/file.h>
 
@@ -8,7 +11,25 @@ FileSystem *FileSystem::instance = nullptr;
 FileSystem::FileSystem()
 {
     this->root = new Folder();
+    this->root->parent = nullptr;
+
+    File *newFile = new File();
+    newFile->name = "README.md";
+    newFile->Write("Welcome to Espnix a simple Unix-like system for ESP32\n"); 
+    newFile->permissions = 0777;
+
+    this->root->AddFile(newFile);
+
     this->currentPath = "/";
+}
+
+FileSystem *FileSystem::GetInstance()
+{
+    if (instance == nullptr)
+    {
+        instance = new FileSystem();
+    }
+    return instance;
 }
 
 std::string FileSystem::GetStringPermissions(int permissions, std::string entryType)
@@ -62,41 +83,74 @@ std::string FileSystem::GetStringPermissions(int permissions, std::string entryT
     }
 }
 
-Folder *FileSystem::GetFolder(std::string path)
-{
+Folder *FileSystem::GetFolder(std::string path) {
     Folder *current = this->root;
+    if (!path.empty() && path[0] != '/') {
+        path = "/" + path;
+    }
 
-    std::string delimiter = "/";
-    size_t pos = 0;
+    std::vector<std::string> tokens;
     std::string token;
+    std::istringstream tokenStream(path);
 
-    while ((pos = path.find(delimiter)) != std::string::npos)
-    {
-        token = path.substr(0, pos);
+    while (std::getline(tokenStream, token, '/')) {
+        if (token == "..") {
+            if (current->parent != nullptr) {
+                current = current->parent;
+            }
+        } else if (!token.empty() && token != ".") {
+            bool found = false;
+            for (auto *folder : current->folders) {
+                if (folder->name == token) {
+                    current = folder;
+                    found = true;
+                    break;
+                }
+            }
 
-        for (auto *folder : current->folders)
-        {
-            if (folder->name == token)
-            {
-                current = folder;
-                break;
+            if (!found) {
+                return nullptr;
             }
         }
-
-        path.erase(0, pos + delimiter.length());
     }
 
     return current;
 }
 
-File *FileSystem::GetFile(std::string path)
-{
-    Folder *folder = this->GetFolder(path);
+File *FileSystem::GetFile(std::string path) {
+    if (path[0] != '/' && path != ".") {
+        path = this->currentPath + "/" + path;
+    }
 
-    for (auto *file : folder->files)
-    {
-        if (file->name == path)
-        {
+    std::vector<std::string> components;
+    std::stringstream ss(path);
+    std::string item;
+    while (getline(ss, item, '/')) {
+        if (!item.empty() && item != ".") {
+            if (item == "..") {
+                if (!components.empty()) {
+                    components.pop_back();
+                }
+            } else {
+                components.push_back(item);
+            }
+        }
+    }
+
+    std::string folderPath;
+    for (size_t i = 0; i < components.size() - 1; ++i) {
+        folderPath += "/" + components[i];
+    }
+
+    Folder *folder = this->GetFolder(folderPath.empty() ? "/" : folderPath);
+    if (folder == nullptr) {
+        return nullptr;
+    }
+
+    std::string fileName = components.back();
+
+    for (auto &file : folder->files) {
+        if (file->name == fileName) {
             return file;
         }
     }
@@ -104,11 +158,14 @@ File *FileSystem::GetFile(std::string path)
     return nullptr;
 }
 
-FileSystem *FileSystem::GetInstance()
+bool FileSystem::FolderExists(std::string path)
 {
-    if (instance == nullptr)
+    Folder *folder = this->GetFolder(path);
+    if (folder != nullptr)
     {
-        instance = new FileSystem();
+        return true;
     }
-    return instance;
+
+    return false;
 }
+

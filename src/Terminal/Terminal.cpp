@@ -33,3 +33,8 @@ void Terminal::Write(std::string output)
 {
     Serial.write(output.c_str());
 }
+
+void Terminal::Clear()
+{
+    Serial.write("\033[2J\033[H");
+}

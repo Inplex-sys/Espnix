@@ -32,6 +32,7 @@ public:
     std::string GetStringPermissions(int permissions, std::string entryType);
     File *GetFile(std::string path);
     Folder *GetFolder(std::string path);
+    bool FolderExists(std::string path);
 };
 
 #endif

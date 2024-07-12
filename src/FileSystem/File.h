@@ -7,7 +7,7 @@ class File
 {
 public:
     std::string name;
-    std::string *content;
+    char *content;
     int owner;
     int permissions;
     int size;
