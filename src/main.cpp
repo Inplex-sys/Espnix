@@ -2,12 +2,14 @@
 
 #include <Terminal/Terminal.h>
 
-Terminal *terminalFrame; 
+Terminal *terminalFrame;
 
-void setup() {
+void setup()
+{
     terminalFrame = new Terminal(250000, 1);
 }
 
-void loop() {
+void loop()
+{
     terminalFrame->Read();
 }

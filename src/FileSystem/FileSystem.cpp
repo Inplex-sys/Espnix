@@ -15,7 +15,7 @@ FileSystem::FileSystem()
 
     File *newFile = new File();
     newFile->name = "README.md";
-    newFile->Write("Welcome to Espnix a simple Unix-like system for ESP32\n"); 
+    newFile->Write("Welcome to Espnix a simple Unix-like syste m for ESP32\n");
     newFile->permissions = 0777;
 
     this->root->AddFile(newFile);
@@ -83,9 +83,11 @@ std::string FileSystem::GetStringPermissions(int permissions, std::string entryT
     }
 }
 
-Folder *FileSystem::GetFolder(std::string path) {
+Folder *FileSystem::GetFolder(std::string path)
+{
     Folder *current = this->root;
-    if (!path.empty() && path[0] != '/') {
+    if (!path.empty() && path[0] != '/')
+    {
         path = "/" + path;
     }
 
@@ -93,22 +95,30 @@ Folder *FileSystem::GetFolder(std::string path) {
     std::string token;
     std::istringstream tokenStream(path);
 
-    while (std::getline(tokenStream, token, '/')) {
-        if (token == "..") {
-            if (current->parent != nullptr) {
+    while (std::getline(tokenStream, token, '/'))
+    {
+        if (token == "..")
+        {
+            if (current->parent != nullptr)
+            {
                 current = current->parent;
             }
-        } else if (!token.empty() && token != ".") {
+        }
+        else if (!token.empty() && token != ".")
+        {
             bool found = false;
-            for (auto *folder : current->folders) {
-                if (folder->name == token) {
+            for (auto *folder : current->folders)
+            {
+                if (folder->name == token)
+                {
                     current = folder;
                     found = true;
                     break;
                 }
             }
 
-            if (!found) {
+            if (!found)
+            {
                 return nullptr;
             }
         }
@@ -117,40 +127,52 @@ Folder *FileSystem::GetFolder(std::string path) {
     return current;
 }
 
-File *FileSystem::GetFile(std::string path) {
-    if (path[0] != '/' && path != ".") {
+File *FileSystem::GetFile(std::string path)
+{
+    if (path[0] != '/' && path != ".")
+    {
         path = this->currentPath + "/" + path;
     }
 
     std::vector<std::string> components;
     std::stringstream ss(path);
     std::string item;
-    while (getline(ss, item, '/')) {
-        if (!item.empty() && item != ".") {
-            if (item == "..") {
-                if (!components.empty()) {
+    while (getline(ss, item, '/'))
+    {
+        if (!item.empty() && item != ".")
+        {
+            if (item == "..")
+            {
+                if (!components.empty())
+                {
                     components.pop_back();
                 }
-            } else {
+            }
+            else
+            {
                 components.push_back(item);
             }
         }
     }
 
     std::string folderPath;
-    for (size_t i = 0; i < components.size() - 1; ++i) {
+    for (size_t i = 0; i < components.size() - 1; ++i)
+    {
         folderPath += "/" + components[i];
     }
 
     Folder *folder = this->GetFolder(folderPath.empty() ? "/" : folderPath);
-    if (folder == nullptr) {
+    if (folder == nullptr)
+    {
         return nullptr;
     }
 
     std::string fileName = components.back();
 
-    for (auto &file : folder->files) {
-        if (file->name == fileName) {
+    for (auto &file : folder->files)
+    {
+        if (file->name == fileName)
+        {
             return file;
         }
     }
@@ -168,4 +190,3 @@ bool FileSystem::FolderExists(std::string path)
 
     return false;
 }
-

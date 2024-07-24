@@ -1,8 +1,8 @@
-#ifndef NMCLICOMMAND_H
-#define NMCLICOMMAND_H
+#ifndef NMCLI_COMMAND_H
+#define NMCLI_COMMAND_H
 
-#include <string>
 #include <vector>
+#include <string>
 
 #include <Shell/Commands/ICommand.h>
 

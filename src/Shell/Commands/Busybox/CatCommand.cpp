@@ -10,7 +10,8 @@
 
 void CatCommand::Execute(const std::vector<std::string> &args, Terminal *terminal)
 {
-    if (args.size() != 1) {
+    if (args.size() != 1)
+    {
         terminal->Write("Usage: cat <filename>\n");
         return;
     }
@@ -19,7 +20,8 @@ void CatCommand::Execute(const std::vector<std::string> &args, Terminal *termina
 
     std::string filePath = args[0];
     File *file = fs->GetFile(filePath);
-    if (file == nullptr) {
+    if (file == nullptr)
+    {
         terminal->Write("cat: " + filePath + ": No such file or directory\n");
         return;
     }

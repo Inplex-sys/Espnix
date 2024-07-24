@@ -14,7 +14,6 @@ void ChangeDirectoryCommand::Execute(const std::vector<std::string> &args, Termi
     std::string path = args[0];
     FileSystem *fs = FileSystem::GetInstance();
 
-    // Handle current directory shortcut
     if (path == ".")
     {
         return;
@@ -25,15 +24,14 @@ void ChangeDirectoryCommand::Execute(const std::vector<std::string> &args, Termi
         if (fs->currentPath != "/")
         {
             fs->currentPath = fs->currentPath.substr(0, fs->currentPath.find_last_of('/'));
-            if (fs->currentPath.empty()) fs->currentPath = "/";
+            if (fs->currentPath.empty())
+                fs->currentPath = "/";
         }
         return;
     }
 
-    // Normalize and construct the new path
     std::string newPath = fs->currentPath == "/" ? "/" + path : fs->currentPath + "/" + path;
 
-    // Check if the folder exists and change directory
     if (fs->FolderExists(newPath))
     {
         fs->currentPath = newPath;
