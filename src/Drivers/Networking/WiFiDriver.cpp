@@ -2,17 +2,6 @@
 
 #include "WiFiDriver.h"
 
-IDriver *IDriver::instance = nullptr;
-
-WiFiDriver *WiFiDriver::GetInstance()
-{
-    if (instance == nullptr)
-    {
-        instance = new WiFiDriver();
-    }
-    return static_cast<WiFiDriver *>(instance);
-}
-
 void WiFiDriver::Initialize()
 {
     WiFi.mode(WIFI_STA);

@@ -7,7 +7,7 @@
 
 #include "NmcliCommand.h"
 
-void NmcliCommand::Execute(const std::vector<std::string> &args, Terminal *terminal)
+void NmcliCommand::Execute(const std::vector<std::string> &args, Terminal *terminal, FileDescriptor *input, FileDescriptor *output)
 {
     if (args.empty())
     {

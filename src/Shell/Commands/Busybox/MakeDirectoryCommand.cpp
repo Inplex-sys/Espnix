@@ -6,7 +6,7 @@
 #include <Terminal/Terminal.h>
 #include <Session/Session.h>
 
-void MakeDirectoryCommand::Execute(const std::vector<std::string> &args, Terminal *terminal)
+void MakeDirectoryCommand::Execute(const std::vector<std::string> &args, Terminal *terminal, FileDescriptor *input, FileDescriptor *output)
 {
     if (args.size() < 1)
     {

@@ -14,7 +14,6 @@ protected:
     IDriver() = default;
     virtual ~IDriver() = default;
 
-    // Singleton instance
     static IDriver *instance;
 
 public:

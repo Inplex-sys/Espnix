@@ -8,6 +8,9 @@
 #include <FileSystem/Folder.h>
 #include <FileSystem/File.h>
 #include <FileSystem/FileSystem.h>
+
+#include <IO/FileDescriptorIO.h>
+
 #include <Terminal/Terminal.h>
 
 #include <Shell/Commands/ICommand.h>
@@ -56,7 +59,10 @@ void Shell::Interpret(const std::string &input)
     auto it = commandRegistry.find(command);
     if (it != commandRegistry.end())
     {
-        it->second->Execute(args, terminal);
+        FileDescriptor *input = new FileDescriptor(0);
+        FileDescriptor *output = new FileDescriptor(1);
+
+        it->second->Execute(args, terminal, input, output);
     }
     else
     {

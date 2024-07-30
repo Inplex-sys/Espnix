@@ -35,6 +35,4 @@ private:
     WiFiDriver &operator=(const WiFiDriver &) = delete;
 };
 
-IDriver *IDriver::instance = nullptr;
-
 #endif

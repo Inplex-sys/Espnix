@@ -8,11 +8,11 @@
 
 #include "CatCommand.h"
 
-void CatCommand::Execute(const std::vector<std::string> &args, Terminal *terminal)
+void CatCommand::Execute(const std::vector<std::string> &args, Terminal *terminal, FileDescriptor *input, FileDescriptor *output)
 {
     if (args.size() != 1)
     {
-        terminal->Write("Usage: cat <filename>\n");
+        terminal->Write("Usage: cat <file>\n");
         return;
     }
 

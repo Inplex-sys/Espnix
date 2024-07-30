@@ -11,7 +11,7 @@
 
 #include "ListCommand.h"
 
-void ListCommand::Execute(const std::vector<std::string> &args, Terminal *terminal)
+void ListCommand::Execute(const std::vector<std::string> &args, Terminal *terminal, FileDescriptor *input, FileDescriptor *output)
 {
     std::set<std::string> flags(args.begin(), args.end());
 

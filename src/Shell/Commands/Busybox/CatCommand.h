@@ -11,7 +11,7 @@ class Terminal;
 class CatCommand : public ICommand
 {
 public:
-    void Execute(const std::vector<std::string> &args, Terminal *terminal) override;
+    void Execute(const std::vector<std::string> &args, Terminal *terminal, FileDescriptor *input, FileDescriptor *output) override;
 };
 
 #endif

@@ -4,7 +4,7 @@
 #include <FileSystem/FileSystem.h>
 #include <Terminal/Terminal.h>
 
-void ChangeDirectoryCommand::Execute(const std::vector<std::string> &args, Terminal *terminal)
+void ChangeDirectoryCommand::Execute(const std::vector<std::string> &args, Terminal *terminal, FileDescriptor *input, FileDescriptor *output)
 {
     if (args.empty())
     {
