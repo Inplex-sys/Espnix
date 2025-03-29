@@ -22,6 +22,8 @@
 #include <Shell/Commands/Busybox/CatCommand.h>
 #include <Shell/Commands/Busybox/ClearCommand.h>
 
+#include <Shell/Commands/Other/IwctlCommand.h>
+
 #include "Shell.h"
 
 Shell::Shell() : terminal(nullptr)
@@ -32,6 +34,7 @@ Shell::Shell() : terminal(nullptr)
     commandRegistry["mkdir"] = std::make_shared<MakeDirectoryCommand>();
     commandRegistry["cat"] = std::make_shared<CatCommand>();
     commandRegistry["clear"] = std::make_shared<ClearCommand>();
+    commandRegistry["iwctl"] = std::make_shared<IwctlCommand>();
 
     this->prompt = "espnix:/# ";
 }
