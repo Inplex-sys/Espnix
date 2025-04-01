@@ -4,18 +4,19 @@
 #include <vector>
 #include <string>
 
-class WiFiDriver {
+class WiFiDriver
+{
 private:
-    static WiFiDriver* instance;
+    static WiFiDriver *instance;
     WiFiDriver();
 
 public:
-    WiFiDriver(const WiFiDriver&) = delete;
-    WiFiDriver& operator=(const WiFiDriver&) = delete;
+    WiFiDriver(const WiFiDriver &) = delete;
+    WiFiDriver &operator=(const WiFiDriver &) = delete;
 
-    static WiFiDriver* getInstance();
+    static WiFiDriver *getInstance();
 
-    bool connect(const char* ssid, const char* password);
+    bool connect(const char *ssid, const char *password);
     void disconnect();
     std::vector<std::string> listSSIDs();
 };

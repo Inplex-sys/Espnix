@@ -11,6 +11,7 @@
 
 class ICommand;
 class Terminal;
+class Loader;
 
 class Shell
 {
@@ -20,8 +21,10 @@ private:
 
 public:
     Terminal *terminal;
+    Loader *loader;
 
     Shell();
+    void SetLoader(Loader *sysLoader);
     void Interpret(const std::string &input);
     void Prompt();
 };
