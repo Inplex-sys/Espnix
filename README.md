@@ -1,5 +1,4 @@
-> [!WARNING]
-> **This project is in its early stages and may not be fully functional.**
+> [!WARNING] > **This project is in its early stages and may not be fully functional.**
 
 <div>
   <img align="left" width="100" src="https://github.com/Inplex-sys/espnix/assets/69421356/090b8ea2-e131-4995-b0c7-1aba19afd5dc" />
@@ -121,7 +120,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the Apache License 2.0 - see the LICENSE file for details.
 
 ## Acknowledgments
 
