@@ -1,4 +1,4 @@
-> [!WARNING] >
+> [!WARNING]
 > **This project is in its early stages and may not be fully functional.**
 
 <div>
