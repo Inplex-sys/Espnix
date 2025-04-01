@@ -35,7 +35,7 @@ Espnix provides a lightweight Unix-like environment for microcontrollers, offeri
 1. Clone the repository:
 
     ```
-    git clone https://github.com/your-username/espnix.git
+    git clone https://github.com/Inplex-sys/Espnix.git
     ```
 
 2. Open the project in Arduino IDE or PlatformIO
